@@ -55,6 +55,7 @@ button::-moz-focus-inner {
 a,
 a:visited {
 	text-decoration: none;
+	color: #fff;
 }
 
 a:hover {
@@ -83,6 +84,8 @@ h6 {
 
 body {
     color: #fff;
+	font-family: Montserrat;
+
 }
 
 /* <!-- |||||||||||||||||||||...MyNameIs...||||||||||||||||||||| --> */
@@ -94,9 +97,10 @@ body {
     justify-content: center; /* Выравнивание по горизонтали */
     align-items: center; /* Выравнивание по вертикали */
     height: 100%;
+	line-height: 20px;
 }
 
-.container-about-text {
+.container-main-text {
     font-size: 15px;
 
     text-align: center;
@@ -118,11 +122,17 @@ body {
     justify-content: center; /* Выравнивание по горизонтали */
     align-items: center; /* Выравнивание по вертикали */
     height: 100%;
+	line-height: 50px;
+	text-align: center;
+	text-transform: uppercase;
 }
 
-/* .container-skills-top {
-    font-size: 15px;
-
-    text-align: start;
-    text-transform: uppercase;
-} */
+.container-contacts {
+	font-size: 30px;
+    background: linear-gradient(to bottom, #9094f8, #e890f8);
+    display: flex;
+    justify-content: center; /* Выравнивание по горизонтали */
+    align-items: center; /* Выравнивание по вертикали */
+    height: 100%;
+	line-height: 50px;
+}
