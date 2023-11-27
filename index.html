@@ -3,40 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="main.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
-    <title>Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;900&family=Montserrat:wght@300;400;600;700;800&family=Oswald:wght@300;400;500;700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik+Iso&display=swap" rel="stylesheet">
+    <title>Weather</title>
 </head>
 <body>
 
     <div class="container-main">
-        <div class="container-main-text">
-            <p>Привет! Меня зовут Владимир и я <br>junior <span class="wd-text">веб-разработчик</span>.</p>
+        <div class="container-search-main">
+
+            <div class="search-line">
+
+                <form class="search-form">
+                    <input class="search-input" id="cityInput" type="text" placeholder="Enter city name...">
+                    <button id="search-button">🔍</button>
+                </form>
+
+            </div>
+
+            <div class="container-data">
+
+
+                <div class="container-left-data">
+                    <p class="temper-text" id="temper-text">10°</p> 
+                    <div class="weather-pic" >
+                        <img src="https://openweathermap.org/img/wn/04n@4x.png" id="weather-icon" alt="">
+                    </div>
+                    
+                    <div class="city-name">
+                        <span id="selectedCity">Moscow</span>
+                        <button class="like-button" id="like-button">♡</button>
+                    </div>
+                </div>
+        
+        
+                <div class="container-right-data">
+                    <div class="header-added-locations">
+                        <span>Added locations:</span>
+                    </div>
+                    <div class="selected-cities">
+                        <ul class="selected-cities-list" id="selected-cities-list">
+                        </ul>
+                    </div>
+                </div>
+
+                
+            </div>
+
+
         </div>
     </div>
 
-
-    <div class="container-skills">
-        <div class="container-skills-center">
-            <p>CSS<br>HTML<br>JavaScript</p>
-        </div>
-    </div>
-
-    <div class="container-contacts">
-        <div class="container-contacts-center">
-            <ul>
-                <li>
-                    <a href="#">Telegram</a>
-                </li>
-                <li>
-                    <a href="#">LinkedIN</a>
-                </li>
-                <li>
-                    <a href="#">Git</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-
+    <script type="module" src="main.js"></script>
 </body>
 </html>

@@ -1,0 +1,191 @@
+* {
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+}
+
+html {
+	height: 100%;
+    font-size: 20px;
+	line-height: 1;
+}
+
+
+body {
+	height: 100%;
+	background-color: #cbcbcb;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: 'Roboto', sans-serif;
+}
+
+.container-main {
+	width: 600px;
+	padding: 10px;
+	box-shadow: 5px 8px 16px #464646;
+	border-radius: 15px;
+	background: linear-gradient(to bottom right, #fbbaba, #9be6ff);
+	opacity: 0.9;
+}
+
+.container-search-main {
+	display: flex;
+    flex-direction: column;
+	align-items: stretch;
+}
+
+/* _____SEARCH LINE INPUT_______ */
+.search-line {
+    padding: 13px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid black;
+    border-bottom: none;
+	border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.search-input {
+    width: 100%;
+	font-size: 20px;
+	text-indent: 10px;
+	outline: none;
+	background-color: rgba(255, 255, 255, 0.5);
+	border-radius: 15px;
+
+}
+
+.search-input::placeholder {
+  	transition: color 0.5s ease;
+}
+  
+.search-input:hover::placeholder {
+	color: #dbdbdb;
+}
+
+#search-button {
+	text-shadow: 0 0 5px #333;
+	font-size: 20px;
+	background-color: transparent;
+    border: none; 
+    cursor: pointer;
+	margin-left: 10px;
+	transition: text-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+#search-button:hover {
+	text-shadow: 0 0 0px #333;
+	transform: scale(1.2);
+}
+/* ________________________________ */
+
+
+.container-data {
+	height: 100%;
+	border: 1px solid black;
+	display: grid;
+ 	grid-template-columns: 1fr 1fr;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+.container-left-data {
+	padding: 10px 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.container-right-data {
+	border-left: 1px solid black;
+
+}
+
+.temper-text {
+	font-size: 63px;
+	font-weight: bold;
+    cursor: default;
+}
+
+.weather-pic {
+	align-self: center;
+}
+
+.city-name {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+    cursor: default;
+}
+
+.like-button {
+	text-shadow: 0 0 10px #000;
+	color: #fff;
+	font-size: 30px;
+	background-color: transparent;
+    border: none; 
+    cursor: pointer;
+	transition: text-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.like-button:hover {
+	color: #ff0000;
+	font-weight: bold;
+	text-shadow: 0 0 2px #c51313;
+	transform: scale(1.2);
+}
+
+.header-added-locations {
+	border-bottom: 1px solid black;
+	padding: 20px 20px;
+	font-size: 25px;
+    cursor: default;
+}
+
+.selected-cities {
+	font-size: 24px;
+	padding: 20px 20px;
+}
+
+.selected-cities-list {
+	list-style-type: none;
+    cursor: default;
+	width: 100%;
+}
+
+.selected-cities-list li {
+	margin-bottom: 5%;
+	display: flex;
+	justify-content: space-between;
+    cursor: pointer;
+	font-weight: 400;
+}
+
+
+.delete-button {
+	width: 22px;
+	height: 22px;
+	background-color: #fff;
+	color: #8a8a8a;
+	border-radius: 50%;
+	font-size: 15px;
+	transition: color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.4s ease-in-out;
+    cursor: pointer;
+	border: 1px solid #d4d4d4;
+	box-shadow: 0 0 5px #000;
+}
+
+.delete-button:hover {
+	transform: scale(1.2);
+	box-shadow: 0 0 0px #000;
+	color: #000;
+	border: 1px solid #fa0000;
+}
