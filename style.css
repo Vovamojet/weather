@@ -106,7 +106,6 @@ body {
 
 .container-right-data {
 	border-left: 1px solid black;
-
 }
 
 .temper-text {
@@ -152,40 +151,59 @@ body {
 
 .selected-cities {
 	font-size: 24px;
-	padding: 20px 20px;
+	padding: 19px 10px;
 }
 
 .selected-cities-list {
 	list-style-type: none;
     cursor: default;
 	width: 100%;
+	padding: 0;
+	display: flex;
+	flex-direction: column; 
+    max-height: 222px;
 }
 
 .selected-cities-list li {
 	margin-bottom: 5%;
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-start;
     cursor: pointer;
 	font-weight: 400;
+	padding: 0;
+	margin-top: auto;
 }
-
 
 .delete-button {
 	width: 22px;
 	height: 22px;
-	background-color: #fff;
+	background-color: rgba(255, 255, 255, 0);
 	color: #8a8a8a;
 	border-radius: 50%;
 	font-size: 15px;
-	transition: color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.4s ease-in-out;
+	transition: color 0.2s ease-in-out, transform 0.2s ease-in-out, box-shadow 0.4s ease-in-out, transform .5s ease;
     cursor: pointer;
-	border: 1px solid #d4d4d4;
-	box-shadow: 0 0 5px #000;
+	margin-right: 10px;
 }
 
-.delete-button:hover {
-	transform: scale(1.2);
+.delete-button:hover{
+	transform: scale(1.2) rotate(90deg);
 	box-shadow: 0 0 0px #000;
 	color: #000;
-	border: 1px solid #fa0000;
 }
+
+.selected-cities-list li p {
+	color: #000;
+	transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out;
+  }
+
+.delete-button:hover + p {
+	text-decoration: line-through;
+	color: #949494;
+}
+  
+
+.selected-cities-list li p:hover {
+	/* color: #ff0000; */
+	font-weight: bold;
+  }

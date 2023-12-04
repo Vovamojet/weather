@@ -7,7 +7,6 @@ let weatherIcon = document.getElementById('weather-icon');
 
 const selectedCitiesArray = [];
 
-//при открытии страницы установить фокус на input и сделать запрос по Москве
 document.addEventListener('DOMContentLoaded', () => {
     searchCityInput.focus();
     cityRequest(event, searchCityInput, 'Moscow');
@@ -70,8 +69,8 @@ function renderSelectedCities(){
             deleteButton.classList.add('delete-button')
             deleteButton.addEventListener('click', deleteCity);
     
-            selectedCityItem.appendChild(cityParagraph);
             selectedCityItem.appendChild(deleteButton);
+            selectedCityItem.appendChild(cityParagraph);
             selectedList.appendChild(selectedCityItem);
         });
     
