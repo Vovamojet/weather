@@ -21,7 +21,8 @@ body {
 }
 
 .container-main {
-	width: 600px;
+	width: 550px;
+	min-width: 320px;
 	padding: 10px;
 	box-shadow: 5px 8px 16px #464646;
 	border-radius: 15px;
@@ -89,7 +90,6 @@ body {
 
 
 .container-data {
-	height: 100%;
 	border: 1px solid black;
 	display: grid;
  	grid-template-columns: 1fr 1fr;
@@ -98,10 +98,12 @@ body {
 }
 
 .container-left-data {
-	padding: 10px 20px;
+	min-height: 250px;
+	padding: 5px 20px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	position: relative;
 }
 
 .container-right-data {
@@ -109,13 +111,24 @@ body {
 }
 
 .temper-text {
-	font-size: 63px;
+	font-size: 40px;
 	font-weight: bold;
     cursor: default;
+	margin-bottom: 145px;
 }
 
 .weather-pic {
 	align-self: center;
+	display: flex;
+	justify-content: center;
+	/* transform: scale(0.5); */
+
+	position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Занимает 100% ширины родительского контейнера */
+    height: 100%; /* Занимает 100% высоты родительского контейнера */
+    z-index: -1; 
 }
 
 .city-name {
@@ -128,7 +141,7 @@ body {
 .like-button {
 	text-shadow: 0 0 10px #000;
 	color: #fff;
-	font-size: 30px;
+	font-size: 26px;
 	background-color: transparent;
     border: none; 
     cursor: pointer;
@@ -138,40 +151,45 @@ body {
 .like-button:hover {
 	color: #ff0000;
 	font-weight: bold;
-	text-shadow: 0 0 2px #c51313;
-	transform: scale(1.2);
+	text-shadow: 0 0 1px #c51313;
+	transform: scale(1.1);
 }
 
 .header-added-locations {
 	border-bottom: 1px solid black;
-	padding: 20px 20px;
-	font-size: 25px;
+	padding: 15px 10px;
+	font-size: 18px;
     cursor: default;
 }
 
 .selected-cities {
-	font-size: 24px;
-	padding: 19px 10px;
+	font-size: 18px;
+	/* padding: 19px 10px; */
+	padding: 10px 10px 0px 10px
 }
 
 .selected-cities-list {
 	list-style-type: none;
     cursor: default;
 	width: 100%;
-	padding: 0;
+	padding: 5px 3px;
 	display: flex;
 	flex-direction: column; 
     max-height: 222px;
 }
 
 .selected-cities-list li {
-	margin-bottom: 5%;
+	margin-bottom: 2%;
 	display: flex;
 	justify-content: flex-start;
     cursor: pointer;
-	font-weight: 400;
-	padding: 0;
-	margin-top: auto;
+	/* font-weight: 400; */
+	/* padding: 0; */
+	/* margin-top: auto; */
+	/* text-align: center; */
+	overflow: hidden;
+	white-space: nowrap; 
+	/* max-width: 25ch; */
 }
 
 .delete-button {
@@ -194,7 +212,7 @@ body {
 
 .selected-cities-list li p {
 	color: #000;
-	transition: color 0.3s ease-in-out, font-weight 0.2s ease-in-out;
+	transition: color 0.3s ease-in-out, font-weight 0.3s ease-in-out;
   }
 
 .delete-button:hover + p {
@@ -204,6 +222,40 @@ body {
   
 
 .selected-cities-list li p:hover {
-	/* color: #ff0000; */
 	font-weight: bold;
-  }
+}
+
+
+
+@media (max-width: 500px) {
+
+	.container-main {
+		width: 320px;
+	}
+	
+	.container-data {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.container-left-data {
+		border-left: 0px solid black;
+	}
+
+	.container-right-data {
+		border-left: 0px solid black;
+	}
+
+	.header-added-locations {
+		padding: 10px 10px;
+		border-top: 1px solid black;
+	}
+	
+	.header-added-locations span {
+		margin-left: 10px;
+	}
+
+	.selected-cities {
+		min-height: 22px;
+	}
+}
