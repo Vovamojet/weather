@@ -8,6 +8,7 @@ html {
 	height: 100%;
     font-size: 20px;
 	line-height: 1;
+	user-select: none;
 }
 
 
@@ -98,12 +99,13 @@ body {
 }
 
 .container-left-data {
-	min-height: 250px;
+	min-height: 222px;
 	padding: 5px 20px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	position: relative;
+	gap: 20px;
 }
 
 .container-right-data {
@@ -111,24 +113,58 @@ body {
 }
 
 .temper-text {
-	font-size: 40px;
+	font-size: 70px;
 	font-weight: bold;
     cursor: default;
-	margin-bottom: 145px;
 }
 
 .weather-pic {
-	align-self: center;
 	display: flex;
-	justify-content: center;
-	/* transform: scale(0.5); */
+	flex-direction: row;
+	justify-content: start;
+}
 
-	position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%; /* Занимает 100% ширины родительского контейнера */
-    height: 100%; /* Занимает 100% высоты родительского контейнера */
-    z-index: -1; 
+.weather-pic img {
+	width: 70px;
+	height: 70px;
+}
+
+.weather-details-feels {
+	font-size: 18px;
+}
+
+.weather-details-feels p {
+	margin-top: 5px;
+}
+
+.container-weather-details-time {
+	font-size: 15px;
+	margin-top: 25px;
+}
+
+.weather-details-time p:first-child {
+	margin-bottom: 10px;
+}
+
+.container-weather-details-time p {
+	margin-top: 3px;
+}
+
+.weather-details-time {
+	margin-top: 15px;
+	border-bottom: 1px solid black;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.weather-details-time img {
+	width: 50px;
+	height: 50px;
+}
+
+.weather-details-time:last-child {
+	border-bottom: 0px solid black;
 }
 
 .city-name {
@@ -164,7 +200,6 @@ body {
 
 .selected-cities {
 	font-size: 18px;
-	/* padding: 19px 10px; */
 	padding: 10px 10px 0px 10px
 }
 
@@ -175,21 +210,17 @@ body {
 	padding: 5px 3px;
 	display: flex;
 	flex-direction: column; 
-    max-height: 222px;
+    /* max-height: 222px; */
 }
 
 .selected-cities-list li {
-	margin-bottom: 2%;
+	margin-bottom: 5px;
 	display: flex;
 	justify-content: flex-start;
     cursor: pointer;
-	/* font-weight: 400; */
-	/* padding: 0; */
-	/* margin-top: auto; */
-	/* text-align: center; */
+	align-items: center;
 	overflow: hidden;
 	white-space: nowrap; 
-	/* max-width: 25ch; */
 }
 
 .delete-button {
