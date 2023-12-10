@@ -137,6 +137,14 @@ body {
 	margin-top: 5px;
 }
 
+.weather-details-time {
+	margin-top: 15px;
+	border-bottom: 1px solid #b5b5b5;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
 .container-weather-details-time {
 	font-size: 15px;
 	margin-top: 25px;
@@ -148,14 +156,6 @@ body {
 
 .container-weather-details-time p {
 	margin-top: 3px;
-}
-
-.weather-details-time {
-	margin-top: 15px;
-	border-bottom: 1px solid black;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
 }
 
 .weather-details-time img {

@@ -3,7 +3,6 @@ let searchButton = document.getElementById('search-button');
 let likeButton = document.getElementById('like-button');
 let temperatureText = document.getElementById('temper-text');
 let feelsLikeText = document.getElementById('feels-like');
-
 let tempTwelveText = document.getElementById('temp-twelve')
 let tempTwelveFeelsText = document.getElementById('temp-twelve-feels')
 let tempFifteenText = document.getElementById('temp-fifteen')
@@ -13,19 +12,25 @@ let tempEighteenFeelsText = document.getElementById('temp-eighteen-feels')
 let weatherIconTwelve = document.getElementById('icon-twelve');
 let weatherIconFifteen = document.getElementById('icon-fifteen');
 let weatherIconEighteen = document.getElementById('icon-eighteen');
-
 let sunriseTime = document.getElementById('sunrise-time');
 let sunsetTime = document.getElementById('sunset-time');
 let selectedCity = document.getElementById('selectedCity');
 let weatherIcon = document.getElementById('weather-icon');
+let CurrentCity;
 
+let selectedCitiesArray = JSON.parse(localStorage.getItem('savedSelectedCity'));
+let savedCurrentCity = localStorage.getItem('currentCity');
 
-const selectedCitiesArray = [];
 
 document.addEventListener('DOMContentLoaded', () => {
-    searchCityInput.focus();
-    cityRequest(event, searchCityInput, 'Moscow');
+    if (savedCurrentCity) {
+        cityRequest(event, searchCityInput, savedCurrentCity);
+    } else {
+        savedCurrentCity = 'Moscow';
+    };
+    renderSelectedCities();
 });
+
 
 function cityRequest(event, searchCityInput, cityName) {
     event.preventDefault();
@@ -48,7 +53,6 @@ function cityRequest(event, searchCityInput, cityName) {
         return response.json()
         })
         .then((data) => {
-            console.log(data);
             let temp = Math.round(data.main.temp - 273.15);
             let city = data.name;
             let feelsTemp = Math.round(data.main.feels_like - 273.15);
@@ -56,14 +60,15 @@ function cityRequest(event, searchCityInput, cityName) {
             let sunrise = sunriseUnixTime.getHours() + ':' + sunriseUnixTime.getMinutes();
             let sunsetUnixTime = (new Date(data.sys.sunset * 1000))
             let sunset = sunsetUnixTime.getHours() + ':' + sunsetUnixTime.getMinutes();
+            const weatherCode = data.weather[0].icon;
 
-            console.log(feelsTemp);
+            CurrentCity = cityName;
+            localStorage.setItem('currentCity', cityName); //сохр в память текущий город
             temperatureText.textContent = (temp);
             feelsLikeText.textContent = ('Feels like: ' + feelsTemp);
             sunriseTime.textContent = ('Sunrise: ' + sunrise);
             sunsetTime.textContent = ('Sunset: ' + sunset);
             selectedCity.textContent = city;
-            const weatherCode = data.weather[0].icon;
             weatherIcon.src = `https://openweathermap.org/img/wn/${weatherCode}@2x.png`;
         })
         .catch(error => {
@@ -77,7 +82,7 @@ function cityRequest(event, searchCityInput, cityName) {
         return response.json()
         })
         .then((data) => {
-            console.log(data);
+            // console.log(data);
             let tempTwelve = Math.round(data.list[5].main.temp - 273.15);
             let tempTwelveFeels = Math.round(data.list[5].main.feels_like - 273.15);
             let weatherCodeTwelve = data.list[5].weather[0].icon;
@@ -102,19 +107,18 @@ function cityRequest(event, searchCityInput, cityName) {
             weatherIconEighteen.src = `https://openweathermap.org/img/wn/${weatherCodeEighteen}@2x.png`;
 
         })
-        // .catch(error => {
-        //     console.error(error);
-        //     alert(error);
-        // });
 
     searchCityInput.value='';
     // cityInput.value = ''; странно, но так тоже работает (cityInput не инициализирована)
+
+    searchCityInput.focus(); //фокусируемся на инпуте
 };
 
 function renderSelectedCities(){
         // Удаляем все элементы списков из DOM
         const selectedList = document.getElementById('selected-cities-list');
         selectedList.innerHTML = "";
+        localStorage.clear(); //чистим localStorage
     
         // Создаем и вставляем элементы списков заново
         selectedCitiesArray.forEach((city) => {
@@ -136,10 +140,12 @@ function renderSelectedCities(){
             selectedCityItem.appendChild(cityParagraph);
             selectedList.appendChild(selectedCityItem);
         });
-    
+
+        localStorage.setItem('savedSelectedCity', JSON.stringify(selectedCitiesArray));
+        savedCurrentCity = localStorage.getItem('currentCity');
+
         console.log('render done');
 };
-
 
 
 function addSelectedCity() {
@@ -156,7 +162,7 @@ function addSelectedCity() {
     // Если город не добавлен и не превышен лимит
     if (!isCityInArray) {
         if (selectedCitiesArray.length < 14) {
-            selectedCitiesArray.push({ name: selectedCity.textContent });
+            selectedCitiesArray.push({ name: selectedCity.textContent});
             renderSelectedCities();
             console.log(selectedCitiesArray);
         } else {
@@ -164,7 +170,6 @@ function addSelectedCity() {
         };
     };
 };
-
 
 
 function deleteCity() {
@@ -177,6 +182,7 @@ function deleteCity() {
     renderSelectedCities();
     console.log(selectedCitiesArray);
 };
+
 
 searchButton.addEventListener('click', function(event) {
     cityRequest(event, searchCityInput, searchCityInput.value);
