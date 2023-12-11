@@ -53,6 +53,7 @@ function cityRequest(event, searchCityInput, cityName) {
         return response.json()
         })
         .then((data) => {
+            // console.log(data);
             let temp = Math.round(data.main.temp - 273.15);
             let city = data.name;
             let feelsTemp = Math.round(data.main.feels_like - 273.15);
@@ -64,6 +65,7 @@ function cityRequest(event, searchCityInput, cityName) {
 
             CurrentCity = cityName;
             localStorage.setItem('currentCity', cityName); //сохр в память текущий город
+            // console.log(feelsTemp);
             temperatureText.textContent = (temp);
             feelsLikeText.textContent = ('Feels like: ' + feelsTemp);
             sunriseTime.textContent = ('Sunrise: ' + sunrise);
