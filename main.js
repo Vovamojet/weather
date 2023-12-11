@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         savedCurrentCity = 'Moscow';
     };
+
     renderSelectedCities();
 });
 
@@ -117,14 +118,15 @@ function cityRequest(event, searchCityInput, cityName) {
 };
 
 function renderSelectedCities(){
-        // Удаляем все элементы списков из DOM
-        const selectedList = document.getElementById('selected-cities-list');
-        selectedList.innerHTML = "";
-        localStorage.clear(); //чистим localStorage
-    
+    // Удаляем все элементы списков из DOM
+    const selectedList = document.getElementById('selected-cities-list');
+    selectedList.innerHTML = "";
+    localStorage.clear(); //чистим localStorage
+
+    // Проверяем, что selectedCitiesArray не равен null
+    if (selectedCitiesArray !== null) {
         // Создаем и вставляем элементы списков заново
         selectedCitiesArray.forEach((city) => {
-
             const selectedCityItem = document.createElement('li');
             const cityParagraph = document.createElement('p');
             cityParagraph.textContent = city.name;
@@ -132,12 +134,12 @@ function renderSelectedCities(){
             cityParagraph.addEventListener('click', () => {
                 cityRequest(event, searchCityInput, city.name);
             });
-    
+
             const deleteButton = document.createElement('button');
             deleteButton.textContent = '✖';
             deleteButton.classList.add('delete-button')
             deleteButton.addEventListener('click', deleteCity);
-    
+
             selectedCityItem.appendChild(deleteButton);
             selectedCityItem.appendChild(cityParagraph);
             selectedList.appendChild(selectedCityItem);
@@ -147,6 +149,7 @@ function renderSelectedCities(){
         savedCurrentCity = localStorage.getItem('currentCity');
 
         console.log('render done');
+    }
 };
 
 
