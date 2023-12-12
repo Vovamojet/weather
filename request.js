@@ -1,5 +1,4 @@
 let CurrentCity;
-// let savedCurrentCity = localStorage.getItem('currentCity');
 let savedCurrentCity;
 
 

@@ -4,9 +4,7 @@ let searchCityInput = document.getElementById('cityInput');
 let searchButton = document.getElementById('search-button');
 let likeButton = document.getElementById('like-button');
 let selectedCity = document.getElementById('selectedCity');
-
 let savedCurrentCity = localStorage.getItem('currentCity');
-
 let selectedCitiesArray = [];
 let selectedCitiesJSON = localStorage.getItem('selectedCitiesArray');
 
@@ -27,96 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// function cityRequest(event, searchCityInput, cityName) {
-//     event.preventDefault();
-
-//     const serverUrl = 'https://api.openweathermap.org/data/2.5/weather';
-//     const serverUrlForecast = 'https://api.openweathermap.org/data/2.5/forecast';
-//     const apiKey = 'f660a2fb1e4bad108d6160b7f58c555f'; 
-//     const url = `${serverUrl}?q=${cityName}&appid=${apiKey}`;
-//     const urlForecast = `${serverUrlForecast}?q=${cityName}&appid=${apiKey}`;
-
-
-//     fetch(url)
-//         .then(response => {
-//             if (response.status === 404) {
-//                 throw new Error(`Город не найден`);
-//             };
-//             if (response.status === 400) {
-//                 throw new Error(`Введите название города`);
-//             };
-//         return response.json()
-//         })
-//         .then((data) => {
-//             // console.log(data);
-//             let temp = Math.round(data.main.temp - 273.15);
-//             let city = data.name;
-//             let feelsTemp = Math.round(data.main.feels_like - 273.15);
-//             let sunriseUnixTime = (new Date(data.sys.sunrise * 1000))
-//             let sunrise = sunriseUnixTime.getHours() + ':' + sunriseUnixTime.getMinutes();
-//             let sunsetUnixTime = (new Date(data.sys.sunset * 1000))
-//             let sunset = sunsetUnixTime.getHours() + ':' + sunsetUnixTime.getMinutes();
-//             const weatherCode = data.weather[0].icon;
-
-//             CurrentCity = cityName;
-//             localStorage.setItem('currentCity', cityName); //сохр в память текущий город
-//             savedCurrentCity = localStorage.getItem('currentCity'); //присвоил переменной
-//             temperatureText.textContent = (temp);
-//             feelsLikeText.textContent = ('Feels like: ' + feelsTemp);
-//             sunriseTime.textContent = ('Sunrise: ' + sunrise);
-//             sunsetTime.textContent = ('Sunset: ' + sunset);
-//             selectedCity.textContent = city;
-//             weatherIcon.src = `https://openweathermap.org/img/wn/${weatherCode}@2x.png`;
-//         })
-//         .catch(error => {
-//             console.error(error);
-//             alert(error);
-//         });
-
-
-//         fetch(urlForecast)
-//         .then(response => {
-//         return response.json()
-//         })
-//         .then((data) => {
-//             let tempTwelve = Math.round(data.list[5].main.temp - 273.15);
-//             let tempTwelveFeels = Math.round(data.list[5].main.feels_like - 273.15);
-//             let weatherCodeTwelve = data.list[5].weather[0].icon;
-//             let tempFifteen = Math.round(data.list[14].main.temp - 273.15);
-//             let tempFifteenFeels = Math.round(data.list[14].main.feels_like - 273.15);
-//             let weatherCodeFifteen = data.list[14].weather[0].icon;
-//             let tempEighteen = Math.round(data.list[15].main.temp - 273.15);
-//             let tempEighteenFeels = Math.round(data.list[15].main.feels_like - 273.15);
-//             let weatherCodeEighteen = data.list[15].weather[0].icon;
-
-
-//             tempTwelveText.textContent = ('Temperature: ' + tempTwelve);
-//             tempTwelveFeelsText.textContent = ('Feels like: ' + tempTwelveFeels);
-//             weatherIconTwelve.src = `https://openweathermap.org/img/wn/${weatherCodeTwelve}@2x.png`;
-
-//             tempFifteenText.textContent = ('Temperature: ' + tempFifteen);
-//             tempFifteenFeelsText.textContent = ('Feels like: ' + tempFifteenFeels);
-//             weatherIconFifteen.src = `https://openweathermap.org/img/wn/${weatherCodeFifteen}@2x.png`;
-
-//             tempEighteenText.textContent = ('Temperature: ' + tempEighteen);
-//             tempEighteenFeelsText.textContent = ('Feels like: ' + tempEighteenFeels);
-//             weatherIconEighteen.src = `https://openweathermap.org/img/wn/${weatherCodeEighteen}@2x.png`;
-
-//         })
-
-//     searchCityInput.value='';
-//     // cityInput.value = ''; странно, но так тоже работает (cityInput не инициализирована)
-
-//     searchCityInput.focus(); //фокусируемся на инпуте
-// };
-
-
 function renderSelectedCities(){
     // Удаляем все элементы списков из DOM
     const selectedList = document.getElementById('selected-cities-list');
     selectedList.innerHTML = "";
-
-    localStorage.clear(); //чистим localStorage
 
     // Создаем и вставляем элементы списков заново
         selectedCitiesArray.forEach((city) => {
@@ -138,33 +50,32 @@ function renderSelectedCities(){
             selectedList.appendChild(selectedCityItem);
         });
 
-        //создаём JSON из массива городов
         selectedCitiesJSON = JSON.stringify(selectedCitiesArray);
-        //сохраняем JSON в память
         localStorage.setItem('selectedCitiesArray', selectedCitiesJSON);
+        localStorage.setItem('currentCity', savedCurrentCity); 
 
+        localStorage.setItem('selectedCitiesArray', JSON.stringify(selectedCitiesArray));
+        localStorage.setItem('currentCity', savedCurrentCity);
 
-        localStorage.setItem('currentCity', savedCurrentCity); //сохраняем текущий город в память
+        searchCityInput.focus(); 
 
         console.log('render done');
-
 };
 
 
 function addSelectedCity() {
     let isCityInArray = false;
     
-    // Есть ли город в массиве
-            selectedCitiesArray.forEach(city => {
-                if (city.name === selectedCity.textContent) {
-                    isCityInArray = true;
-                    alert('Город уже добавлен в избранное.');
-                }
-            });
-        // Если город не добавлен и не превышен лимит
+        selectedCitiesArray.forEach(city => {
+            if (city.name === selectedCity.textContent) {
+                isCityInArray = true;
+                alert('Город уже добавлен в избранное.');
+            }
+        });
+
         if (!isCityInArray) {
             if (selectedCitiesArray.length < 14) {
-                savedCurrentCity = selectedCity.textContent; //сохраняем текущий город
+                savedCurrentCity = selectedCity.textContent; 
                 selectedCitiesArray.push({ name: selectedCity.textContent});
                 renderSelectedCities();
                 console.log(selectedCitiesArray);
@@ -178,14 +89,10 @@ function addSelectedCity() {
 function deleteCity() {
     let cityParagraph = this.parentNode.querySelector('p');
     let cityName = cityParagraph.textContent;
-
     const indexToDelete = selectedCitiesArray.findIndex(city => city.name === cityName);
     selectedCitiesArray.splice(indexToDelete, 1);
-
-    savedCurrentCity = selectedCity.textContent; //сохраняем текущий город
-
+    savedCurrentCity = selectedCity.textContent; 
     renderSelectedCities();
-    console.log(selectedCitiesArray);
 };
 
 
