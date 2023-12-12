@@ -16,17 +16,26 @@ let sunriseTime = document.getElementById('sunrise-time');
 let sunsetTime = document.getElementById('sunset-time');
 let selectedCity = document.getElementById('selectedCity');
 let weatherIcon = document.getElementById('weather-icon');
-let CurrentCity;
 
-let selectedCitiesArray = JSON.parse(localStorage.getItem('savedSelectedCity'));
+let CurrentCity;
 let savedCurrentCity = localStorage.getItem('currentCity');
+
+let selectedCitiesArray = [];
+let selectedCitiesJSON = localStorage.getItem('selectedCitiesArray');
 
 
 document.addEventListener('DOMContentLoaded', () => {
+
     if (savedCurrentCity) {
         cityRequest(event, searchCityInput, savedCurrentCity);
     } else {
         savedCurrentCity = 'Moscow';
+    };
+
+    if (selectedCitiesJSON) {
+        selectedCitiesArray = JSON.parse(selectedCitiesJSON);
+        console.log('Если массив не пустой, то он = ');
+        console.log(selectedCitiesArray);
     };
 
     renderSelectedCities();
@@ -66,7 +75,7 @@ function cityRequest(event, searchCityInput, cityName) {
 
             CurrentCity = cityName;
             localStorage.setItem('currentCity', cityName); //сохр в память текущий город
-            // console.log(feelsTemp);
+            savedCurrentCity = localStorage.getItem('currentCity'); //присвоил переменной
             temperatureText.textContent = (temp);
             feelsLikeText.textContent = ('Feels like: ' + feelsTemp);
             sunriseTime.textContent = ('Sunrise: ' + sunrise);
@@ -85,7 +94,6 @@ function cityRequest(event, searchCityInput, cityName) {
         return response.json()
         })
         .then((data) => {
-            // console.log(data);
             let tempTwelve = Math.round(data.list[5].main.temp - 273.15);
             let tempTwelveFeels = Math.round(data.list[5].main.feels_like - 273.15);
             let weatherCodeTwelve = data.list[5].weather[0].icon;
@@ -117,15 +125,15 @@ function cityRequest(event, searchCityInput, cityName) {
     searchCityInput.focus(); //фокусируемся на инпуте
 };
 
+
 function renderSelectedCities(){
     // Удаляем все элементы списков из DOM
     const selectedList = document.getElementById('selected-cities-list');
     selectedList.innerHTML = "";
+
     localStorage.clear(); //чистим localStorage
 
-    // Проверяем, что selectedCitiesArray не равен null
-    if (selectedCitiesArray !== null) {
-        // Создаем и вставляем элементы списков заново
+    // Создаем и вставляем элементы списков заново
         selectedCitiesArray.forEach((city) => {
             const selectedCityItem = document.createElement('li');
             const cityParagraph = document.createElement('p');
@@ -145,11 +153,18 @@ function renderSelectedCities(){
             selectedList.appendChild(selectedCityItem);
         });
 
-        localStorage.setItem('savedSelectedCity', JSON.stringify(selectedCitiesArray));
-        savedCurrentCity = localStorage.getItem('currentCity');
+        //создаём JSON из массива городов
+        selectedCitiesJSON = JSON.stringify(selectedCitiesArray);
+        // console.log('JSON:')
+        // console.log(selectedCitiesJSON)
+        //сохраняем JSON в память
+        localStorage.setItem('selectedCitiesArray', selectedCitiesJSON);
+
+
+        localStorage.setItem('currentCity', savedCurrentCity); //сохраняем текущий город в память
 
         console.log('render done');
-    }
+
 };
 
 
@@ -157,23 +172,22 @@ function addSelectedCity() {
     let isCityInArray = false;
     
     // Есть ли город в массиве
-    selectedCitiesArray.forEach(city => {
-        if (city.name === selectedCity.textContent) {
-            isCityInArray = true;
-            alert('Город уже добавлен в избранное.');
-        }
-    });
-
-    // Если город не добавлен и не превышен лимит
-    if (!isCityInArray) {
-        if (selectedCitiesArray.length < 14) {
-            selectedCitiesArray.push({ name: selectedCity.textContent});
-            renderSelectedCities();
-            console.log(selectedCitiesArray);
-        } else {
-            alert('Достигнут лимит избранных городов');
+            selectedCitiesArray.forEach(city => {
+                if (city.name === selectedCity.textContent) {
+                    isCityInArray = true;
+                    alert('Город уже добавлен в избранное.');
+                }
+            });
+        // Если город не добавлен и не превышен лимит
+        if (!isCityInArray) {
+            if (selectedCitiesArray.length < 14) {
+                selectedCitiesArray.push({ name: selectedCity.textContent});
+                renderSelectedCities();
+                console.log(selectedCitiesArray);
+            } else {
+                alert('Достигнут лимит избранных городов');
+            };
         };
-    };
 };
 
 
