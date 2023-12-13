@@ -1,4 +1,5 @@
 import { cityRequest } from "./request.js";
+import { renderSelectedCities } from "./render.js";
 
 let searchCityInput = document.getElementById('cityInput');
 let searchButton = document.getElementById('search-button');
@@ -21,46 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
         selectedCitiesArray = JSON.parse(selectedCitiesJSON);
     };
 
-    renderSelectedCities();
+    renderSelectedCities(selectedCitiesArray, savedCurrentCity, deleteCity, selectedCitiesJSON, searchCityInput, cityRequest);
 });
-
-
-function renderSelectedCities(){
-    // Удаляем все элементы списков из DOM
-    const selectedList = document.getElementById('selected-cities-list');
-    selectedList.innerHTML = "";
-
-    // Создаем и вставляем элементы списков заново
-        selectedCitiesArray.forEach((city) => {
-            const selectedCityItem = document.createElement('li');
-            const cityParagraph = document.createElement('p');
-            cityParagraph.textContent = city.name;
-
-            cityParagraph.addEventListener('click', () => {
-                cityRequest(event, searchCityInput, city.name);
-            });
-
-            const deleteButton = document.createElement('button');
-            deleteButton.textContent = '✖';
-            deleteButton.classList.add('delete-button')
-            deleteButton.addEventListener('click', deleteCity);
-
-            selectedCityItem.appendChild(deleteButton);
-            selectedCityItem.appendChild(cityParagraph);
-            selectedList.appendChild(selectedCityItem);
-        });
-
-        selectedCitiesJSON = JSON.stringify(selectedCitiesArray);
-        localStorage.setItem('selectedCitiesArray', selectedCitiesJSON);
-        localStorage.setItem('currentCity', savedCurrentCity); 
-
-        localStorage.setItem('selectedCitiesArray', JSON.stringify(selectedCitiesArray));
-        localStorage.setItem('currentCity', savedCurrentCity);
-
-        searchCityInput.focus(); 
-
-        console.log('render done');
-};
 
 
 function addSelectedCity() {
@@ -77,7 +40,8 @@ function addSelectedCity() {
             if (selectedCitiesArray.length < 14) {
                 savedCurrentCity = selectedCity.textContent; 
                 selectedCitiesArray.push({ name: selectedCity.textContent});
-                renderSelectedCities();
+                // renderSelectedCities();
+                renderSelectedCities(selectedCitiesArray, savedCurrentCity, deleteCity, selectedCitiesJSON, searchCityInput, cityRequest);
                 console.log(selectedCitiesArray);
             } else {
                 alert('Достигнут лимит избранных городов');
@@ -92,7 +56,7 @@ function deleteCity() {
     const indexToDelete = selectedCitiesArray.findIndex(city => city.name === cityName);
     selectedCitiesArray.splice(indexToDelete, 1);
     savedCurrentCity = selectedCity.textContent; 
-    renderSelectedCities();
+    renderSelectedCities(selectedCitiesArray, savedCurrentCity, deleteCity, selectedCitiesJSON, searchCityInput, cityRequest);
 };
 
 
