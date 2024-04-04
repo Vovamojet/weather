@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;900&family=Montserrat:wght@300;400;600;700;800&family=Oswald:wght@300;400;500;700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik+Iso&display=swap" rel="stylesheet">
+    <title>Weather</title>
+</head>
+<body>
+
+    <div class="container-main">
+        <div class="container-search-main">
+
+            <div class="search-line">
+
+                <form class="search-form">
+                    <input class="search-input" id="cityInput" type="text" placeholder="Enter city name...">
+                    <button id="search-button">🔍</button>
+                </form>
+
+            </div>
+
+            <div class="container-data">
+
+
+                <div class="container-left-data">
+
+                    <div class="city-name">
+                        <span id="selectedCity">Moscow</span>
+                        <button class="like-button" id="like-button">♡</button>
+                    </div>
+                    
+                    <div class="weather-pic" >
+                        <p class="temper-text" id="temper-text">10</p> 
+                        <img src="https://openweathermap.org/img/wn/04n@4x.png" id="weather-icon" alt="">
+                    </div>
+
+                    <div class="weather-details">
+
+                        <div class="weather-details-feels">
+                            <p id="feels-like">Feels like: 10</p>
+                            <p id="sunrise-time">Sunrise: 03:21</p>
+                            <p id="sunset-time">Sunset: 18:54</p>
+                        </div>
+
+                        <div class="container-weather-details-time">
+
+                            <div class="weather-details-time">
+                                <div class="leftside">
+                                    <p>12:00</p>
+                                    <p id="temp-twelve">Temperature: 13</p>
+                                    <p id="temp-twelve-feels" >Feels like: 11</p>
+                                </div>
+                                <div class="forecast-image">
+                                    <img src="https://openweathermap.org/img/wn/04n@2x.png" id="icon-twelve" alt="">
+                                </div>
+                            </div>
+
+                            <div class="weather-details-time">
+                                <div class="leftside">
+                                    <p>15:00</p>
+                                    <p id="temp-fifteen">Temperature: 13</p>
+                                    <p id="temp-fifteen-feels" >Feels like: 11</p>
+                                </div>
+                                <div class="forecast-image">
+                                    <img src="https://openweathermap.org/img/wn/04n@2x.png" id="icon-fifteen" alt="">
+                                </div>
+                            </div>
+
+                            <div class="weather-details-time">
+                                <div class="leftside">
+                                    <p>18:00</p>
+                                    <p id="temp-eighteen">Temperature: 13</p>
+                                    <p id="temp-eighteen-feels" >Feels like: 11</p>
+                                </div>
+                                <div class="forecast-image">
+                                    <img src="https://openweathermap.org/img/wn/04n@2x.png" id="icon-eighteen" alt="">
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    
+
+                </div>
+        
+        
+                <div class="container-right-data">
+                    <div class="header-added-locations">
+                        <span>Added locations:</span>
+                    </div>
+                    <div class="selected-cities">
+                        <ul class="selected-cities-list" id="selected-cities-list">
+                        </ul>
+                    </div>
+                </div>
+
+                
+            </div>
+
+
+        </div>
+    </div>
+
+    <script type="module" src="main.js"></script>
+</body>
+</html>
